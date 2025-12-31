@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "JmT/p596p9I=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\acsil\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\acsil\\.nuget\\packages\\s1api.forked\\2.8.5\\s1api.forked.2.8.5.nupkg.sha512"
+  ],
+  "logs": []
+}

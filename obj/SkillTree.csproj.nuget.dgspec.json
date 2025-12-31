@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj",
+        "projectName": "SkillTree",
+        "projectPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj",
+        "packagesPath": "C:\\Users\\acsil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\acsil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "S1API.Forked": {
+              "target": "Package",
+              "version": "[2.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
