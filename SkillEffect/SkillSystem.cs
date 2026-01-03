@@ -151,7 +151,7 @@ namespace SkillTree.SkillEffect
 
                 case "ChemistStationQuick":
                     SkillPatchOperations.StationTimeLess.TimeAjust = (data.ChemistStationQuick * 1.5f);
-                    SkillPatchOperations.MixOutputAdd.TimeAjust = (data.ChemistStationQuick * 2);
+                    SkillPatchOperations.MixOutputAdd.TimeAjust = (data.ChemistStationQuick * 2) == 0 ? 1 : (data.ChemistStationQuick * 2);
                     break;
 
                 case "MoreCauldronOutput":
