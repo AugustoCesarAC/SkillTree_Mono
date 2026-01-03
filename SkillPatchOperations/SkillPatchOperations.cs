@@ -167,7 +167,7 @@ namespace SkillTree.SkillPatchOperations
     public static class MixOutputAdd
     {
         public static int Add = 1;
-        public static int TimeAjust = 2;
+        public static int TimeAjust = 1;
     }
 
     [HarmonyPatch(typeof(MixingStation))] // Certifique-se que o nome da classe é MixStation
@@ -195,7 +195,8 @@ namespace SkillTree.SkillPatchOperations
         [HarmonyPostfix]
         public static void Postfix(MixingStation __instance, ref int __result)
         {
-            if (MixOutputAdd.Add == 1) return;
+            if (MixOutputAdd.Add == 2)
+                MixOutputAdd.TimeAjust = 4;
 
             if (__instance.CurrentMixOperation == null || __result <= 0) return;
             int tempoCalculado = (__instance.MixTimePerItem * __instance.CurrentMixOperation.Quantity) / MixOutputAdd.TimeAjust;
@@ -391,7 +392,7 @@ namespace SkillTree.SkillPatchOperations
 
                 if (potName.Equals("Grow Tent")) baseQuality = 0.1f + BetterGrowTent.Add;
                 else if (potName.Equals("Plastic Pot")) baseQuality = 0.26f;
-                else if (potName.Equals("Moisture-Preserving Pot")) baseQuality = 0.26f;
+                else if (potName.Equals("Moisture-Preserving Pot")) baseQuality = 0.36f;
                 else if (potName.Equals("Air Pot")) baseQuality = 0.5f;
                 else baseQuality = 0.1f; 
 

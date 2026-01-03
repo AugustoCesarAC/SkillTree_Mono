@@ -27,24 +27,32 @@ namespace SkillTree.Json
         [Skill("More XP", "Increase XP Gain by 5%", SkillCategory.Stats, "Stats")]
         public int MoreXP = 0;
 
-        // Stats subs
+        // MoreXP subs
         [Skill("More Item Stack (x2)", "Increase Item Stack (x2)", SkillCategory.Stats, "MoreXP", 1)]
         public int MoreStackItem = 0;
-
-        // Stats subs
-        [Skill("Allow Sleep with Athletic or Energizing", "Allow sleeping while Athletic or Energizing effects are active", SkillCategory.Stats, "Stats", 1)]
-        public int AllowSleepAthEne = 0;
-
-        // AllowSleepAthEne subs
-        [Skill("Allow Use Bed to Skip the Current Schedule", "Skip Schedule Only Affect Plants (Plants Grow 33% of the time)", SkillCategory.Stats, "AllowSleepAthEne", 1)]
-        public int SkipSchedule = 0;
 
         // MoreXP subs
         [Skill("More XP Per Sell When Earn Money", "Earn 5% bonus XP based on item value when selling drugs", SkillCategory.Stats, "MoreXP", 1)]
         public int MoreXPWhenEarnMoney = 0;
 
         // Stats subs
-        [Skill("More XP 2", "Increase XP Gain by an additional 5%", SkillCategory.Stats, "MoreXP", 5)]
+        [Skill("Better Delivery", "Make Deliveries More Fast (6H -> 2H)", SkillCategory.Stats, "Stats", 1)]
+        public int BetterDelivery = 0;
+
+        // Stats subs
+        [Skill("Allow Sleep with Athletic or Energizing", "Allow sleeping while Athletic or Energizing effects are active", SkillCategory.Stats, "Stats", 1)]
+        public int AllowSleepAthEne = 0;
+
+        // Stats subs
+        [Skill("Counteroffer Perception", "Allows you to see the chance of a customer making a counteroffer", SkillCategory.Stats, "Stats", 1)]
+        public int AllowSeeCounteroffChance = 0;
+
+        // AllowSleepAthEne subs
+        [Skill("Allow Use Bed to Skip the Current Schedule", "Skip Schedule Only Affect Plants (Plants Grow 33% of the time)", SkillCategory.Stats, "AllowSleepAthEne", 1)]
+        public int SkipSchedule = 0;
+
+        // Stats subs
+        [Skill("More XP 2", "Increase XP Gain by an additional 5%", SkillCategory.Stats, "MoreXP", 4)]
         public int MoreXP2 = 0;
 
         /* STATUS END HERE */
@@ -62,7 +70,7 @@ namespace SkillTree.Json
         public int MoreYield = 0;
 
         // Operations subs
-        [Skill("More Quality", "Increase Quality in 30% (At Max Advance Tier)", SkillCategory.Operations, "MoreYield", 2)]
+        [Skill("Advanced Pot Techniques", "+15% Quality. [Lvl 1] Moisture Pots gain +1 Tier. [Max Lvl] All Pots gain +1 Tier.", SkillCategory.Operations, "MoreYield", 2)]
         public int MoreQuality = 0;
 
         // Operations subs
@@ -77,10 +85,6 @@ namespace SkillTree.Json
         [Skill("Increase Growth Speed 2°", "Increase Growth Speed by 2.5%", SkillCategory.Operations, "MoreQuality", 2)]
         public int GrowthSpeed2 = 0;
 
-        // Operations subs
-        [Skill("AbsorbentSoil", "Preserve soil additives at maximum level", SkillCategory.Operations, "MoreQuality", 2)]
-        public int AbsorbentSoil = 0;
-
         // MoreMixOutput subs
         [Skill("Chemist Station Quick", "Increase the speed of ALL Chemistry Station (x2 or a little more)", SkillCategory.Operations, "MoreYield", 1)]
         public int ChemistStationQuick = 0;
@@ -89,8 +93,12 @@ namespace SkillTree.Json
         [Skill("More Mix and Drying Rack Output", "Double Mix and Drying Rack Output", SkillCategory.Operations, "ChemistStationQuick", 1)]
         public int MoreMixAndDryingRackOutput = 0;
 
+        // Operations subs
+        [Skill("AbsorbentSoil", "Preserve soil additives", SkillCategory.Operations, "ChemistStationQuick", 1)]
+        public int AbsorbentSoil = 0;
+
         // MoreMixOutput subs
-        [Skill("More Cauldron Output", "Increase Cauldron Output by 25%", SkillCategory.Operations, "MoreMixOutput", 4)]
+        [Skill("More Cauldron Output", "Double Cauldron Output", SkillCategory.Operations, "MoreMixAndDryingRackOutput", 1)]
         public int MoreCauldronOutput = 0;
 
         /* OPERATIONS END HERE */
@@ -101,15 +109,15 @@ namespace SkillTree.Json
         public int Social = 0;
 
         // Social subs
-        [Skill("Civil More Money per week", "Increase Citizens' weekly money by 10%", SkillCategory.Social, "Social", 3)]
+        [Skill("Civil More Money per week", "Increase Citizens' weekly money by 10%", SkillCategory.Social, "Social", 2)]
         public int CityEvolving = 0;
 
         // Social subs
-        [Skill("More ATM Limit", "Increase ATM Deposit Limit by +1250", SkillCategory.Social, "Social", 4)]
+        [Skill("More ATM Limit", "Increase ATM Deposit Limit by +1500", SkillCategory.Social, "Social", 4)]
         public int MoreATMLimit = 0;
 
         // MoreATMLimit subs
-        [Skill("Better Business", "Increase Max Money Laundering Capacity by 10%", SkillCategory.Social, "Social", 3)]
+        [Skill("Better Business", "Increase Max Money Laundering Capacity by 20%", SkillCategory.Social, "Social", 3)]
         public int BusinessEvolving = 0;
 
         // Social subs

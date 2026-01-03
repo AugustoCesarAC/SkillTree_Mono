@@ -1,14 +1,31 @@
 ﻿using HarmonyLib;
 using MelonLoader;
+using Mono.Unix.Native;
+using ScheduleOne;
+using ScheduleOne.Delivery;
 using ScheduleOne.DevUtilities;
+using ScheduleOne.Economy;
+using ScheduleOne.GameTime;
 using ScheduleOne.Growing;
 using ScheduleOne.Interaction;
 using ScheduleOne.Levelling;
+using ScheduleOne.Messaging;
+using ScheduleOne.NPCs;
+using ScheduleOne.NPCs.CharacterClasses;
 using ScheduleOne.ObjectScripts;
+using ScheduleOne.ObjectScripts.Cash;
 using ScheduleOne.PlayerScripts.Health;
+using ScheduleOne.Product;
 using ScheduleOne.Quests;
 using ScheduleOne.Tools;
+using ScheduleOne.UI.Phone;
+using System.Collections;
+using System.Reflection;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static MelonLoader.MelonLogger;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace SkillTree.SkillPatchStats
 {
@@ -105,7 +122,7 @@ namespace SkillTree.SkillPatchStats
             {
                 _jaProcessado = true;
                 int xpOriginal = xp;
-                xp = Mathf.RoundToInt(xp * multiplicador);
+                xp = Mathf.CeilToInt(xp * multiplicador);
                 MelonLogger.Msg($"[XP] Apply: {xpOriginal} -> {xp} (Base: {PlayerXPConfig.XpBase}%)");
                 MelonLogger.Msg("Total XP Now: " + (__instance.TotalXP + xp));
             }
@@ -187,7 +204,7 @@ namespace SkillTree.SkillPatchStats
         public static string GetTimeRemaining(float currentTime)
         {
             int next = GetNextSchedule();
-            if (next == 0) next = 2400; 
+            if (next == 0) next = 2400;
 
             int currentTotalMin = ((int)currentTime / 100 * 60) + ((int)currentTime % 100);
             int nextTotalMin = (next / 100 * 60) + (next % 100);
@@ -205,9 +222,9 @@ namespace SkillTree.SkillPatchStats
 
             if (time >= 700 && time < 1200) return 1200;
             if (time >= 1203 && time < 1800) return 1800;
-            if (time >= 1803 && time < 2357) return 2357; 
+            if (time >= 1803 && time < 2357) return 2357;
 
-            return (int)time; 
+            return (int)time;
         }
 
         [HarmonyPatch(typeof(Bed), "CanSleep")]
@@ -273,21 +290,21 @@ namespace SkillTree.SkillPatchStats
                 if (!CanUseBedSkill())
                 {
                     MelonLogger.Msg("[BedSkill] You've already rested today! Use it only tomorrow.");
-                    return true; 
+                    return true;
                 }
 
                 float currentTime = NetworkSingleton<ScheduleOne.GameTime.TimeManager>.Instance.CurrentTime;
-                
+
                 if (currentTime >= 700)
                 {
                     int nextTarget = GetNextSchedule();
 
-                    int totalMinutesPassed = (int)(CalculateMinutesBetween(currentTime, (float)nextTarget))/3;
+                    int totalMinutesPassed = (int)(CalculateMinutesBetween(currentTime, (float)nextTarget)) / 3;
 
                     if (totalMinutesPassed > 0)
                     {
                         foreach (GrowContainer container in UnityEngine.Object.FindObjectsOfType<GrowContainer>())
-                            AccessTools.Method(typeof(GrowContainer), "DrainMoisture")?.Invoke(container, new object[] { totalMinutesPassed*3 });
+                            AccessTools.Method(typeof(GrowContainer), "DrainMoisture")?.Invoke(container, new object[] { totalMinutesPassed * 3 });
                         foreach (Plant plant in UnityEngine.Object.FindObjectsOfType<Plant>())
                             plant.MinPass((int)(totalMinutesPassed));
                     }
@@ -316,6 +333,213 @@ namespace SkillTree.SkillPatchStats
             int endTotal = (endHours * 60) + endMins;
 
             return endTotal - startTotal;
+        }
+    }
+
+    /// <summary>
+    /// COUNTER OFFER 
+    /// </summary>
+    public static class CounterofferHelper
+    {
+        public static bool Counteroffer = false;
+
+        public static float CalculateSuccessChance(CounterofferInterface instance)
+        {
+            var conversation = Traverse.Create(instance).Field<MSGConversation>("conversation").Value; 
+            var price = Traverse.Create(instance).Field<float>("price").Value; 
+            var product = Traverse.Create(instance).Field<ProductDefinition>("selectedProduct").Value; 
+            var quantity = Traverse.Create(instance).Field<int>("quantity").Value;
+
+            Customer customer = conversation.sender.GetComponent<Customer>(); 
+            CustomerData customerData = customer.CustomerData; 
+            NPC NPC = customer.NPC;
+
+            float adjustedWeeklySpend = customerData.GetAdjustedWeeklySpend(NPC.RelationData.RelationDelta / 5f);
+
+            List<EDay> orderDays = customerData.GetOrderDays(customer.CurrentAddiction, NPC.RelationData.RelationDelta / 5f);
+            float num = adjustedWeeklySpend / (float)orderDays.Count;
+
+            if (price >= num * 3f) 
+                return 0f;
+
+            float valueProposition = Customer.GetValueProposition(Registry.GetItem<ProductDefinition>(customer.OfferedContractInfo.Products.entries[0].ProductID), 
+                                    customer.OfferedContractInfo.Payment / (float)customer.OfferedContractInfo.Products.entries[0].Quantity);
+
+            float productEnjoyment = customer.GetProductEnjoyment(product, customerData.Standards.GetCorrespondingQuality());
+
+            float num2 = Mathf.InverseLerp(-1f, 1f, productEnjoyment);
+
+            float valueProposition2 = Customer.GetValueProposition(product, price / (float)quantity);
+
+            float num3 = Mathf.Pow((float)quantity / (float)customer.OfferedContractInfo.Products.entries[0].Quantity, 0.6f);
+
+            float num4 = Mathf.Lerp(0f, 2f, num3 * 0.5f); float num5 = Mathf.Lerp(1f, 0f, Mathf.Abs(num4 - 1f));
+
+            if (valueProposition2 * num5 > valueProposition)
+                return 1f;
+
+            if (valueProposition2 < 0.12f) 
+                return 0f;
+
+            float num6 = productEnjoyment * valueProposition;
+            float num7 = num2 * num5 * valueProposition2;
+            if (num7 > num6) 
+              return 1f;
+
+            float num8 = num6 - num7;
+            float num9 = Mathf.Lerp(0f, 1f, num8 / 0.2f);
+            float t = Mathf.Max(customer.CurrentAddiction, NPC.RelationData.NormalizedRelationDelta);
+            float num10 = Mathf.Lerp(0f, 0.2f, t);
+
+            if (num9 <= num10) 
+                return 1f;
+
+            if (num9 - num10 >= 0.9f) 
+                return 0f;
+
+            float probability = (0.9f + num10 - num9) / 0.9f;
+            return Mathf.Clamp(probability, 0f, 1f);
+        }
+
+        public static Text SuccessLabel;
+
+        public static void CreateSuccessLabel(CounterofferInterface instance)
+        {
+            if (SuccessLabel != null)
+                return;
+
+            var fairLabel = Traverse.Create(instance)
+                .Field<Text>("FairPriceLabel").Value;
+
+
+            var parent = fairLabel.transform.parent;
+
+            var go = UnityEngine.Object.Instantiate(
+                fairLabel.gameObject,
+                parent
+            );
+
+            go.name = "SuccessChanceLabel";
+
+            SuccessLabel = go.GetComponent<Text>();
+            SuccessLabel.font = fairLabel.font;
+            SuccessLabel.fontSize = fairLabel.fontSize;
+            SuccessLabel.fontStyle = FontStyle.Bold;
+            SuccessLabel.alignment = fairLabel.alignment;
+            SuccessLabel.color = Color.black;
+            SuccessLabel.supportRichText = true;
+            SuccessLabel.enabled = true;
+            SuccessLabel.text = "Success chance: --%";
+
+            var layout = go.AddComponent<LayoutElement>();
+            layout.ignoreLayout = true;
+
+            RectTransform fairRT = fairLabel.rectTransform;
+            RectTransform rt = SuccessLabel.rectTransform;
+
+            rt.anchorMin = fairRT.anchorMin;
+            rt.anchorMax = fairRT.anchorMax;
+            rt.pivot = fairRT.pivot;
+            rt.sizeDelta = fairRT.sizeDelta;
+
+            rt.anchoredPosition = fairRT.anchoredPosition + new Vector2(0f, -23f);
+
+            go.transform.SetAsLastSibling();
+            //MelonLogger.Msg("SuccessChanceLabel visível abaixo do FairPrice");
+
+        }
+
+        public static void UpdateSuccessLabel(CounterofferInterface instance)
+        {
+            if (SuccessLabel == null)
+                return;
+
+            float chance = CounterofferHelper.CalculateSuccessChance(instance);
+            //MelonLogger.Msg($"CalculateSuccessChance {chance}");
+
+            string color =
+                chance >= 0.75f ? "#4CAF50" :
+                chance >= 0.4f ? "#FFC107" :
+                "#F44336";
+
+            SuccessLabel.text =
+                $"<color={color}>Success chance: {(chance * 100f):0}%</color>";
+            //MelonLogger.Msg($"SuccessLabel.text {SuccessLabel.text}");
+        }
+
+        [HarmonyPatch(typeof(CounterofferInterface), "Open")]
+        public static class Counteroffer_Open_Patch
+        {
+            [HarmonyPostfix]
+            public static void Postfix(CounterofferInterface __instance)
+            {
+                if (!Counteroffer)
+                    return;
+
+                CreateSuccessLabel(__instance);
+                UpdateSuccessLabel(__instance);
+            }
+        }
+
+        [HarmonyPatch(typeof(CounterofferInterface), "ChangeQuantity")]
+        public static class Counteroffer_ChangeQuantity_Patch
+        {
+            [HarmonyPostfix]
+            public static void Postfix(CounterofferInterface __instance)
+            {
+                if (!Counteroffer)
+                    return;
+
+                UpdateSuccessLabel(__instance);
+            }
+        }
+
+        [HarmonyPatch(typeof(CounterofferInterface), "ChangePrice")]
+        public static class Counteroffer_ChangePrice_Patch
+        {
+            [HarmonyPostfix]
+            public static void Postfix(CounterofferInterface __instance)
+            {
+                if (!Counteroffer)
+                    return;
+
+                UpdateSuccessLabel(__instance);
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// BETTER DELIVERY
+    /// </summary>
+    public static class BetterDelivery
+    {
+        public static bool Add = false;
+    }
+
+    [HarmonyPatch(typeof(DeliveryManager), "SendDelivery")]
+    public static class DeliveryTime_Patch
+    {
+        [HarmonyPrefix]
+        public static void Prefix(ref DeliveryInstance delivery)
+        {
+            if (!BetterDelivery.Add)
+                return;
+
+            if (delivery == null) return;
+
+            if (delivery.TimeUntilArrival <= 120)
+                return;
+
+            int originalTime = delivery.TimeUntilArrival;
+
+            float ratio = Mathf.InverseLerp(60f, 360f, (float)originalTime);
+
+            int newTime = Mathf.RoundToInt(Mathf.Lerp(30f, 120f, ratio));
+
+            delivery.TimeUntilArrival = newTime;
+
+            MelonLogger.Msg($"[DeliverySkill] Delivery scaling adjusted. Original: {originalTime}m | New: {newTime}m");
         }
     }
 

@@ -1,8 +1,12 @@
 ﻿using MelonLoader;
+using ScheduleOne.Delivery;
 using ScheduleOne.Economy;
 using ScheduleOne.GameTime;
 using ScheduleOne.Levelling;
 using ScheduleOne.PlayerScripts;
+using ScheduleOne.Property;
+using ScheduleOne.UI.Phone;
+using ScheduleOne.UI.Phone.Delivery;
 using SkillTree.Json;
 using SkillTree.SkillEffect;
 using SkillTree.UI;
@@ -120,20 +124,21 @@ namespace SkillTree
         private bool WaitTime()
         {   
             if (!firstTime)
-                LoggerInstance.Msg("Iniciando delay de init");
+            {
+                if (timeManager == null || levelManager == null || playerMovement == null)
+                    Init();
+                skillData = SkillTreeSaveManager.LoadOrCreate();
+                skillTreeUI = new SkillTreeUI(skillData);
+                SkillSystem.ApplyAll(skillData);
+            }
 
             firstTime = true;
             timer -= Time.deltaTime;
 
             if (timer <= 0f)
             {
-                if (timeManager == null || levelManager == null || playerMovement == null)
-                    Init();
                 ItemUnlocker.UnlockSpecificItems();
-                skillData = SkillTreeSaveManager.LoadOrCreate();
                 AttPoints();
-                skillTreeUI = new SkillTreeUI(skillData);
-                SkillSystem.ApplyAll(skillData);
                 waiting = true;
                 return true;
             }
@@ -149,7 +154,9 @@ namespace SkillTree
             int currentTier = levelManager.Tier - 1;
 
             int maxPointsPossible = (currentRank * 6) + currentTier;
+            MelonLogger.Msg("maxPointsPossible " + maxPointsPossible);
             int maxPointsJson = skillData.StatsPoints + skillData.OperationsPoints + skillData.SocialPoints + skillData.UsedSkillPoints;
+            MelonLogger.Msg("maxPointsJson " + maxPointsJson);
 
             if (maxPointsPossible != maxPointsJson && !levelUp)
             {
@@ -158,6 +165,8 @@ namespace SkillTree
                 if (File.Exists(path))
                     File.Delete(path);
                 skillData = SkillTreeSaveManager.LoadOrCreate();
+                skillTreeUI = new SkillTreeUI(skillData);
+                SkillSystem.ApplyAll(skillData);
                 skillPointValid = maxPointsPossible;
             }
 

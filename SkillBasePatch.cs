@@ -7,6 +7,7 @@ using ScheduleOne.ItemFramework;
 using ScheduleOne.Levelling;
 using ScheduleOne.ObjectScripts;
 using ScheduleOne.PlayerScripts;
+using ScheduleOne.Property;
 using ScheduleOne.UI.Shop;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace SkillTree
             { "plasticpot",             new FullRank(ERank.Street_Rat, 5) },
             { "halogengrowlight",       new FullRank(ERank.Street_Rat, 5) },
             { "suspensionrack",         new FullRank(ERank.Street_Rat, 5) },
-            { "airpot",                 new FullRank(ERank.Hustler, 5) },
+            { "airpot",                 new FullRank(ERank.Peddler, 2) },
             { "cauldron",               new FullRank(ERank.Bagman, 3) },
             { "brickpress",             new FullRank(ERank.Bagman, 5) },
             { "dryingrack",             new FullRank(ERank.Street_Rat, 5) }
@@ -225,6 +226,26 @@ namespace SkillTree
         {
             if (QuickPackagers.Add)
                 __instance.PackagerEmployeeSpeedMultiplier = 2f;
+        }
+    }
+
+    public static class StackCache
+    {
+        public static Dictionary<string, int> ItemStack = new Dictionary<string, int>();
+        public static bool IsLoaded = false;
+
+        public static void FillCache(List<ItemDefinition> business)
+        {
+            if (IsLoaded) return;
+
+            foreach (var c in business)
+            {
+                string key = c.name;
+                if (!ItemStack.ContainsKey(key))
+                    ItemStack.Add(key, c.StackLimit);
+            }
+            IsLoaded = true;
+            MelonLogger.Msg("ItemStack Memory successfully stored!");
         }
     }
 

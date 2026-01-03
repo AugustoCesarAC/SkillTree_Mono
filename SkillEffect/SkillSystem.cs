@@ -1,6 +1,7 @@
 ﻿using MelonLoader;
 using ScheduleOne;
 using ScheduleOne.Economy;
+using ScheduleOne.Growing;
 using ScheduleOne.ItemFramework;
 using ScheduleOne.PlayerScripts;
 using ScheduleOne.Property;
@@ -28,6 +29,7 @@ namespace SkillTree.SkillEffect
             customerList = UnityEngine.Object.FindObjectsOfType<Customer>();
             dealerList = UnityEngine.Object.FindObjectsOfType<Dealer>();
             businessList = UnityEngine.Object.FindObjectsOfType<Business>();
+            List<ItemDefinition> allItems = registry.GetAllItems();
 
             switch (skillId)
             {
@@ -55,15 +57,20 @@ namespace SkillTree.SkillEffect
                         QuickPackagers.Add = true;
                         if (registry == null) return;
 
-                        List<ItemDefinition> allItems = registry.GetAllItems();
+                        StackCache.FillCache(allItems);
 
-                        foreach (var def in allItems)
+                        int multiplier = 1 + (data.MoreStackItem);
+
+                        foreach (ItemDefinition item in allItems)
                         {
-                            if (def == null)
-                                continue;
+                            string key = item.name;
 
-                            int oldLimit = def.StackLimit;
-                            def.StackLimit = oldLimit * 2;
+                            if (StackCache.ItemStack.TryGetValue(key, out int baseMin))
+                            {
+                                int stackLimit = item.StackLimit;
+                                item.StackLimit = baseMin * multiplier;
+                                MelonLogger.Msg($"[MoreStackItem] {key}: {baseMin} -> {item.StackLimit}");
+                            }
                         }
                         MelonLogger.Msg($"Skill Item Stack x2 Active");
                         break;
@@ -80,9 +87,19 @@ namespace SkillTree.SkillEffect
                         MelonLogger.Msg($"XP Base atualizada para: {SkillPatchStats.PlayerXPConfig.XpBase}%");
                         break;
                     }
+                case "BetterDelivery":
+                    {
+                        SkillPatchStats.BetterDelivery.Add = (data.BetterDelivery == 1);
+                        break;
+                    }
                 case "AllowSleepAthEne":
                     {
                         SkillPatchStats.AllowSleepAthEne.Add = (data.AllowSleepAthEne == 1);
+                        break;
+                    }
+                case "AllowSeeCounteroffChance":
+                    {
+                        SkillPatchStats.CounterofferHelper.Counteroffer = (data.AllowSeeCounteroffChance == 1);
                         break;
                     }
                 case "SkipSchedule":
@@ -134,13 +151,13 @@ namespace SkillTree.SkillEffect
 
                 case "ChemistStationQuick":
                     SkillPatchOperations.StationTimeLess.TimeAjust = (data.ChemistStationQuick * 1.5f);
-                    SkillPatchOperations.MixOutputAdd.TimeAjust = (data.MoreMixAndDryingRackOutput * 2);
+                    SkillPatchOperations.MixOutputAdd.TimeAjust = (data.ChemistStationQuick * 2);
                     break;
 
                 case "MoreCauldronOutput":
                     {
                         int valueBase = SkillPatchOperations.CauldronOutputAdd.Add;
-                        int bonus = Mathf.FloorToInt(valueBase * 0.25f * data.MoreCauldronOutput);
+                        int bonus = Mathf.FloorToInt(valueBase * 1f * data.MoreCauldronOutput);
                         SkillPatchOperations.CauldronOutputAdd.Add = valueBase + bonus;
                     }
                     break;
@@ -175,7 +192,7 @@ namespace SkillTree.SkillEffect
                 case "BusinessEvolving":
                     {
                         BusinessCache.FillCache(businessList.ToList());
-                        float multiplier = 1.0f + (data.BusinessEvolving * 0.10f);
+                        float multiplier = 1.0f + (data.BusinessEvolving * 0.20f);
 
                         foreach (Business business in businessList)
                         {
@@ -188,12 +205,12 @@ namespace SkillTree.SkillEffect
                                 MelonLogger.Msg($"[BusinessEvolving] {key}: {baseMin} -> {business.LaunderCapacity}");
                             }
                         }
-                        MelonLogger.Msg($"LaunderCapacity incresed by {1.0f + (data.BusinessEvolving * 0.10f)}%");
+                        MelonLogger.Msg($"LaunderCapacity incresed by {1.0f + (data.BusinessEvolving * 0.20f)}%");
                     }
                     break;
                 case "MoreATMLimit":
                     {
-                        SkillPatchSocial.ATMConfig.MaxWeeklyLimit = 10000f + (data.MoreATMLimit * 1250f);
+                        SkillPatchSocial.ATMConfig.MaxWeeklyLimit = 10000f + (data.MoreATMLimit * 1500);
                         MelonLogger.Msg($"ATM Deposit Weekly Limit: ${SkillPatchSocial.ATMConfig.MaxWeeklyLimit}");
                         break;
                     }
@@ -205,7 +222,7 @@ namespace SkillTree.SkillEffect
                                 continue;
                             float origin = dealer.Cut;
                             dealer.Cut = 0.2f - (data.DealerCutLess * 0.05f);
-                            MelonLogger.Msg($"Dealer: ${dealer.name} decrease cut from ${origin}% to ${dealer.Cut}");
+                            MelonLogger.Msg($"Dealer: {dealer.name} decrease cut from {origin}% to {dealer.Cut}");
                         }
                         break;
                     }
@@ -240,9 +257,7 @@ namespace SkillTree.SkillEffect
         {
             foreach (var field in typeof(SkillTreeData).GetFields(BindingFlags.Public | BindingFlags.Instance))
             {
-                int level = (int)field.GetValue(data);
-                if (level > 0)
-                    SkillSystem.ApplySkill(field.Name, data);
+                SkillSystem.ApplySkill(field.Name, data);
             }
         }
 
