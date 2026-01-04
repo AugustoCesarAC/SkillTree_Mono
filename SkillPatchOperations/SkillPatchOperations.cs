@@ -410,7 +410,7 @@ namespace SkillTree.SkillPatchOperations
                             MelonLogger.Msg("No initial additives found for instant growth");
                         else
                         {
-                            float delta = 0f;
+                            /*float delta = 0f;
                             foreach (var additive in additives)
                             {
                                 if (additive == null)
@@ -435,7 +435,7 @@ namespace SkillTree.SkillPatchOperations
 
 
                                 finalQuality += delta;
-                                MelonLogger.Msg($"[SkillTree] Change Quality {finalQuality} | Additive: {additive.Name.ToString().ToLower().Trim()}");
+                                MelonLogger.Msg($"[SkillTree] Change Quality {finalQuality} | Additive: {additive.Name.ToString().ToLower().Trim()}");*/
 
                                 if (additive.InstantGrowth > 0f && __instance.NormalizedGrowthProgress < 0.5f)
                                 {

@@ -144,7 +144,7 @@ namespace SkillTree.SkillEffect
                     break;
 
                 case "AbsorbentSoil":
-                    SkillPatchOperations.AbsorbentSoil.Add = (data.AbsorbentSoil == 2);
+                    SkillPatchOperations.AbsorbentSoil.Add = (data.AbsorbentSoil == 1);
                     break;
 
                 case "MoreMixAndDryingRackOutput":
