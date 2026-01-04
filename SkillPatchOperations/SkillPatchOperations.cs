@@ -144,7 +144,9 @@ namespace SkillTree.SkillPatchOperations
         [HarmonyPrefix]
         public static void Prefix(ref int mins)
         {
-            mins = Mathf.RoundToInt(mins * StationTimeLess.TimeAjust);
+            if (StationTimeLess.TimeAjust <= 1f)
+                return;
+            mins = Mathf.CeilToInt(mins * StationTimeLess.TimeAjust);
         }
     }
 
