@@ -159,7 +159,6 @@ C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstanda
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\MonoMod.Utils.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\MonoMod.RuntimeDetour.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\bHapticsLib.dll
-C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\AssetRipper.VersionUtilities.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\Tomlet.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\Mono.Cecil.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\AssetsTools.NET.dll
@@ -178,3 +177,5 @@ C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\obj\Debug\netstanda
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\obj\Debug\netstandard2.1\SkillTree.dll
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\obj\Debug\netstandard2.1\SkillTree.pdb
 C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\obj\Debug\netstandard2.1\SkillTree.sourcelink.json
+C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\AssetRipper.Primitives.dll
+C:\Users\acsil\OneDrive\Documentos\0ModMelonLoader\SkillTree\bin\Debug\netstandard2.1\MelonLoader.pdb

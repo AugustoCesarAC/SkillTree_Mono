@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using HarmonyLib;
+using MelonLoader;
 using ScheduleOne;
 using ScheduleOne.Economy;
 using ScheduleOne.Growing;
@@ -9,6 +10,7 @@ using SkillTree.Json;
 using SkillTree.SkillPatchSocial;
 using System.Reflection;
 using UnityEngine;
+using static MelonLoader.MelonLogger;
 
 namespace SkillTree.SkillEffect
 {
@@ -138,6 +140,7 @@ namespace SkillTree.SkillEffect
 
                 case "MoreQualityMushroom":
                     SkillPatchOperations.QualityMushroomUP.Add = (data.MoreQualityMushroom == 1 ? 0.3f : 0f);
+                    MelonLogger.Msg($"[Quality] Base: Standard | Boosted: Premium");
                     break;
 
                 case "AbsorbentSoil":
