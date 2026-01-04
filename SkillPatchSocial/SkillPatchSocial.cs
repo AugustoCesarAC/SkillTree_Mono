@@ -65,6 +65,61 @@ namespace SkillTree.SkillPatchSocial
     }
 
     [HarmonyPatch(typeof(ATMInterface))]
+    public static class ATMInterface_UnlockLimit_Patch
+    {
+        [HarmonyPatch("remainingAllowedDeposit", MethodType.Getter)]
+        [HarmonyPrefix]
+        public static bool PrefixRemaining(ref float __result)
+        {
+            __result = Mathf.Max(0f, ATMConfig.MaxWeeklyLimit - ATM.WeeklyDepositSum); 
+            return false; 
+        }
+
+        [HarmonyPatch("Update")]
+        [HarmonyPostfix]
+        public static void PostfixUpdate(ATMInterface __instance, Button ___menu_DepositButton, Text ___depositLimitText)
+        {
+            if (!__instance.isOpen) return;
+
+            bool limitReached = ATM.WeeklyDepositSum >= ATMConfig.MaxWeeklyLimit;
+
+            if (___menu_DepositButton != null)
+                ___menu_DepositButton.interactable = !limitReached;
+
+            if (___depositLimitText != null)
+            {
+                ___depositLimitText.text = MoneyManager.FormatAmount(ATM.WeeklyDepositSum) + " / " + MoneyManager.FormatAmount(ATMConfig.MaxWeeklyLimit);
+                ___depositLimitText.color = limitReached ? new Color32(255, 75, 75, 255) : Color.white;
+            }
+        }
+
+        [HarmonyPatch("UpdateAvailableAmounts")]
+        [HarmonyPrefix]
+        public static bool PrefixUpdateAmounts(ATMInterface __instance, bool ___depositing, List<Button> ___amountButtons)
+        {
+            if (___depositing)
+            {
+                float cash = NetworkSingleton<MoneyManager>.Instance.cashBalance;
+                float remaining = Mathf.Max(0f, ATMConfig.MaxWeeklyLimit - ATM.WeeklyDepositSum);
+
+                for (int i = 0; i < ATMInterface.amounts.Length; i++)
+                {
+                    if (i >= ___amountButtons.Count) break;
+                    if (i == ___amountButtons.Count - 1)
+                        ___amountButtons[i].interactable = cash > 0f && remaining > 0f;
+                    else
+                    {
+                        float amountVal = (float)ATMInterface.amounts[i];
+                        ___amountButtons[i].interactable = (cash >= amountVal) && (ATM.WeeklyDepositSum + amountVal <= ATMConfig.MaxWeeklyLimit);
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+    }
+
+    /*[HarmonyPatch(typeof(ATMInterface))]
     public class PatchATMInterface
     {
         [HarmonyPatch("remainingAllowedDeposit", MethodType.Getter)]
@@ -133,7 +188,7 @@ namespace SkillTree.SkillPatchSocial
         {
             return instance.GetType().GetProperty(propName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(instance);
         }
-    }
+    }*/
 
     /// <summary>
     /// UP CUSTOMER SAMPLE
