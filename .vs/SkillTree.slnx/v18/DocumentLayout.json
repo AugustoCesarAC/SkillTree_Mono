@@ -1,29 +1,33 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\",
+  "WorkspaceRootPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\skillpatchsocial\\skillpatchsocial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillpatchsocial\\skillpatchsocial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\ui\\skilltreeui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:ui\\skilltreeui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\skillpatchstats\\skillpatchstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillpatchstats\\skillpatchstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\skillpatchoperations\\skillpatchoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\skillpatchoperations\\skillpatchoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillpatchoperations\\skillpatchoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\skilleffect\\skillsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\skillpatchsocial\\skillpatchsocial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillpatchsocial\\skillpatchsocial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\skillpatchstats\\skillpatchstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillpatchstats\\skillpatchstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\skilleffect\\skillsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skilleffect\\skillsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\skillsjson\\skillslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\skillsjson\\skillslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:skillsjson\\skillslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|c:\\users\\acsil\\onedrive\\documentos\\0modmelonloader\\skilltree mono\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3BBD9AA-4119-220A-AF16-D031D2D717A2}|SkillTree.csproj|solutionrelative:core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -39,62 +43,72 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SkillPatchSocial.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchSocial\\SkillPatchSocial.cs",
-              "RelativeDocumentMoniker": "SkillPatchSocial\\SkillPatchSocial.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchSocial\\SkillPatchSocial.cs",
-              "RelativeToolTip": "SkillPatchSocial\\SkillPatchSocial.cs",
-              "ViewState": "AgIAAEYBAAAAAAAAAAAgwFIBAAAmAAAAAAAAAA==",
+              "Title": "SkillTreeUI.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\UI\\SkillTreeUI.cs",
+              "RelativeDocumentMoniker": "UI\\SkillTreeUI.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\UI\\SkillTreeUI.cs",
+              "RelativeToolTip": "UI\\SkillTreeUI.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAAAHMAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-04T19:45:55.578Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SkillSlot.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillsJson\\SkillSlot.cs",
-              "RelativeDocumentMoniker": "SkillsJson\\SkillSlot.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillsJson\\SkillSlot.cs",
-              "RelativeToolTip": "SkillsJson\\SkillSlot.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAgwFgAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-04T02:27:41.683Z",
+              "WhenOpened": "2026-01-05T14:18:36.968Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "SkillPatchSocial.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchSocial\\SkillPatchSocial.cs",
+              "RelativeDocumentMoniker": "SkillPatchSocial\\SkillPatchSocial.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchSocial\\SkillPatchSocial.cs",
+              "RelativeToolTip": "SkillPatchSocial\\SkillPatchSocial.cs",
+              "ViewState": "AgIAAEYBAAAAAAAAAAAgwFIBAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T19:45:55.578Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SkillSlot.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillsJson\\SkillSlot.cs",
+              "RelativeDocumentMoniker": "SkillsJson\\SkillSlot.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillsJson\\SkillSlot.cs",
+              "RelativeToolTip": "SkillsJson\\SkillSlot.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAgwFgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T02:27:41.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "SkillPatchOperations.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchOperations\\SkillPatchOperations.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchOperations\\SkillPatchOperations.cs",
               "RelativeDocumentMoniker": "SkillPatchOperations\\SkillPatchOperations.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchOperations\\SkillPatchOperations.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchOperations\\SkillPatchOperations.cs",
               "RelativeToolTip": "SkillPatchOperations\\SkillPatchOperations.cs",
-              "ViewState": "AgIAAC8BAAAAAAAAAAAqwD0BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADABAAAAAAAAAAAiwD0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-03T13:52:07.598Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SkillPatchStats.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchStats\\SkillPatchStats.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchStats\\SkillPatchStats.cs",
               "RelativeDocumentMoniker": "SkillPatchStats\\SkillPatchStats.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillPatchStats\\SkillPatchStats.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillPatchStats\\SkillPatchStats.cs",
               "RelativeToolTip": "SkillPatchStats\\SkillPatchStats.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-02T11:08:34.797Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-02T11:08:34.797Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Core.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\Core.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\Core.cs",
               "RelativeDocumentMoniker": "Core.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\Core.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\Core.cs",
               "RelativeToolTip": "Core.cs",
               "ViewState": "AgIAAFIAAAAAAAAAAAAqwFwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -102,16 +116,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SkillSystem.cs",
-              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillEffect\\SkillSystem.cs",
+              "DocumentMoniker": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillEffect\\SkillSystem.cs",
               "RelativeDocumentMoniker": "SkillEffect\\SkillSystem.cs",
-              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillEffect\\SkillSystem.cs",
+              "ToolTip": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillEffect\\SkillSystem.cs",
               "RelativeToolTip": "SkillEffect\\SkillSystem.cs",
               "ViewState": "AgIAAIIAAAAAAAAAAIAwwJoAAACRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-02T11:02:18.08Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-02T11:02:18.08Z"
             }
           ]
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj": {}
+    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillTree.csproj": {}
   },
   "projects": {
-    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj": {
+    "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillTree.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj",
+        "projectUniqueName": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillTree.csproj",
         "projectName": "SkillTree",
-        "projectPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\SkillTree.csproj",
+        "projectPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\SkillTree.csproj",
         "packagesPath": "C:\\Users\\acsil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree\\obj\\",
+        "outputPath": "C:\\Users\\acsil\\OneDrive\\Documentos\\0ModMelonLoader\\SkillTree Mono\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\acsil\\AppData\\Roaming\\NuGet\\NuGet.Config",
