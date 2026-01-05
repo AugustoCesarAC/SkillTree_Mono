@@ -109,7 +109,7 @@ namespace SkillTree.SkillEffect
                         break;
                     }
                 case "MoreXPWhenEarnMoney":
-                        SkillPatchStats.PlayerXpMoney.XpMoney = true;
+                        SkillPatchStats.PlayerXpMoney.XpMoney = (data.MoreXPWhenEarnMoney == 1);
                         break;
 
                 // OPERATIONS
