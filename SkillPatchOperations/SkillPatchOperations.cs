@@ -11,7 +11,9 @@ using ScheduleOne.Product;
 using ScheduleOne.Variables;
 using System.Reflection;
 using UnityEngine;
+using static ScheduleOne.Console;
 using static ScheduleOne.ObjectScripts.Pot;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace SkillTree.SkillPatchOperations
 {
@@ -354,7 +356,7 @@ namespace SkillTree.SkillPatchOperations
     [HarmonyPatch(typeof(ShroomColony), "GetHarvestedShroom")]
     public static class MushroomQualityPatch
     {
-        [HarmonyPostfix] 
+        [HarmonyPostfix]
         public static void Postfix(ShroomColony __instance, ref ShroomInstance __result)
         {
             if (QualityMushroomUP.Add > 0f && __result != null)
@@ -560,7 +562,38 @@ namespace SkillTree.SkillPatchOperations
         public static bool Add = false;
     }
 
-    [HarmonyPatch(typeof(ChemistryStation), "FinalizeOperation")]
+    [HarmonyPatch(typeof(LabOven), "Shatter")]
+    public static class LabOven_QualityPatch
+    {
+        private static readonly HashSet<object> processedOperations = new HashSet<object>();
+
+        [HarmonyPrefix]
+        public static void Prefix(LabOven __instance)
+        {
+            if (__instance.CurrentOperation == null) return;
+
+            var op = __instance.CurrentOperation;
+
+            if (processedOperations.Contains(op)) return;
+
+            if (op.IngredientQuality < EQuality.Heavenly)
+            {
+                MelonLogger.Msg($"__instance.CurrentOperation.IngredientQuality {__instance.CurrentOperation.IngredientQuality}");
+                __instance.CurrentOperation.IngredientQuality += 1;
+                processedOperations.Add(op);
+                MelonLogger.Msg($"__instance.CurrentOperation.IngredientQuality {__instance.CurrentOperation.IngredientQuality}");
+                MelonCoroutines.Start(CleanUp(op));
+            }
+        }
+
+        private static System.Collections.IEnumerator CleanUp(object id)
+        {
+            yield return new WaitForSeconds(1f);
+            processedOperations.Remove(id);
+        }
+    }
+
+    /*[HarmonyPatch(typeof(ChemistryStation), "FinalizeOperation")]
     public static class ChemistryStation_QualityPatch
     {
         private static readonly HashSet<int> processedOperations = new HashSet<int>();
@@ -598,6 +631,6 @@ namespace SkillTree.SkillPatchOperations
             yield return new WaitForSeconds(1f);
             processedOperations.Remove(id);
         }
-    }
+    }*/
 
 }

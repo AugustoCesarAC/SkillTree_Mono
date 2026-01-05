@@ -5,6 +5,7 @@ using ScheduleOne.Economy;
 using ScheduleOne.GameTime;
 using ScheduleOne.Levelling;
 using ScheduleOne.Money;
+using ScheduleOne.ObjectScripts;
 using ScheduleOne.PlayerScripts;
 using ScheduleOne.Property;
 using ScheduleOne.UI.ATM;
