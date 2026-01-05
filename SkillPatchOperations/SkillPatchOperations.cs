@@ -138,28 +138,24 @@ namespace SkillTree.SkillPatchOperations
         }
     }
 
-    [HarmonyPatch(typeof(ChemistryCookOperation), "Progress")]
-    public static class ChemistryStation_FastProgress_Patch
+    [HarmonyPatch(typeof(ChemistryStation), "MinPass")]
+    public static class ChemistryStation_MinPass_Mono_Patch
     {
         [HarmonyPrefix]
-        public static void Prefix(ref int mins)
+        public static void Prefix(ChemistryStation __instance)
         {
-            if (StationTimeLess.TimeAjust <= 1f)
-                return;
-            mins = Mathf.CeilToInt(mins * StationTimeLess.TimeAjust);
+            if (StationTimeLess.TimeAjust > 1f)
+                __instance.CurrentCookOperation.Progress(1);
         }
     }
 
-    [HarmonyPatch(typeof(OvenCookOperation), "GetCookDuration")] 
+    [HarmonyPatch(typeof(OvenCookOperation), "UpdateCookProgress")] 
     public static class CookStation_Duration_Patch
     {
-        [HarmonyPostfix]
-        public static void Postfix(ref int __result)
+        [HarmonyPrefix]
+        public static void Prefix(ref int change)
         {
-            if (__result > 0)
-            {
-                __result = Mathf.Max(1, Mathf.RoundToInt(__result / StationTimeLess.TimeAjust));
-            }
+            change = Mathf.CeilToInt(StationTimeLess.TimeAjust);
         }
     }
 
