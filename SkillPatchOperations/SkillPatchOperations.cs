@@ -314,6 +314,7 @@ namespace SkillTree.SkillPatchOperations
             num *= __instance.Pot.GetAverageLightExposure(out var growSpeedMultiplier);
             num *= __instance.Pot.GrowSpeedMultiplier;
             num *= growSpeedMultiplier;
+            num += (num * GrowthSpeedUp.Add);
 
             if (GameManager.IS_TUTORIAL)
                 num *= 0.3f;

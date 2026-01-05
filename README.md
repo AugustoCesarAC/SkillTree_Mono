@@ -2,6 +2,8 @@
 
 **Source Code**: [https://github.com/AugustoCesarAC/SkillTree](https://github.com/AugustoCesarAC/SkillTree)
 
+**Main and Mono Branch**
+
 ## **Functions**
 
 To open the Skill Tree Window, just press **"C"**
@@ -150,10 +152,7 @@ This isn't my first mod, but it is the first one I've made for myself that I fel
 
 ## **F.A.Q.**
 
-**1. Q: Why only the Mono/Alternative Branch?**
-A: Built to ensure compatibility with other popular mods like Cartel Enforcer.
-
-**2. Q: My points disappeared or my skills reset. Why?**
+**1. Q: My points disappeared or my skills reset. Why?**
 A: This happens if the JSON file and your save go out of sync (e.g., closing without saving). The mod safely resets skills and returns your points.
 
 ---

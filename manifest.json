@@ -3,7 +3,7 @@
   "version_number": "1.0.0",
   "description": "Create a Skilltree system in Schedule I",
   "main": "skilltree.dll",
-  "website_url": "https://github.com/AugustoCesarAC/SkillTree/tree/main",
+  "website_url": "https://github.com/AugustoCesarAC/SkillTree_Mono",
   "dependencies": ["LavaGang-MelonLoader-0.7.0"],
   "author": "CrazyReizor"
 }
