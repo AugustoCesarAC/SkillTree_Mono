@@ -239,9 +239,9 @@ namespace SkillTree
                 skillData = SkillTreeSaveManager.LoadOrCreate();
                 skillConfig = SkillTreeSaveManager.LoadConfig();
                 skillTreeUI = new SkillTreeUI(skillData, skillConfig);
-                SkillSystem.ApplyAll(skillData);
                 skillPointValid = maxPointsPossible;
             }
+            SkillSystem.ApplyAll(skillData);
         }
 
         public override void OnGUI()
