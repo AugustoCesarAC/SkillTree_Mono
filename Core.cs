@@ -16,6 +16,7 @@ using SkillTree.SkillEffect;
 using SkillTree.SkillsJson;
 using SkillTree.UI;
 using UnityEngine;
+using static SkillTree.SkillActive.SkillActive;
 
 [assembly: MelonInfo(typeof(SkillTree.Core), "SkillTree", "1.0.0", "CrazyReizor", null)]
 [assembly: MelonGame("TVGS", "Schedule I")]
@@ -41,6 +42,7 @@ namespace SkillTree
         private SkillConfig skillConfig;
         private SkillTreeUI skillTreeUI;
         private int skillPointValid = 0;
+        private int specialSkillPointValid = 0;
 
         private bool waiting = false;
         private bool firstTime = false;
@@ -100,7 +102,11 @@ namespace SkillTree
             {
                 skillTreeUI.Visible = !skillTreeUI.Visible;
                 treeUiChange = true;
+                MelonLogger.Msg($"Heal HP {localPlayer.Health.CurrentHealth}");
+                SkillActive.SkillActive.ValidSkill();
             }
+
+            ActiveSkills();
 
             if (skillTreeUI.Visible)
                 playerCamera.SetDoFActive(true, 0.06f);
@@ -125,6 +131,19 @@ namespace SkillTree
                 playerInventory.SetInventoryEnabled(!skillTreeUI.Visible);
             }
 
+        }
+
+
+        public void ActiveSkills()
+        {
+            if (Input.GetKeyDown(KeyCode.F1) && waiting && SkillEnabled.enabledTrash)
+                SkillActive.SkillActive.ClearTrash();
+
+            if (Input.GetKeyDown(KeyCode.F2) && waiting && SkillEnabled.enabledHeal)
+                SkillActive.SkillActive.Heal();
+
+            if (Input.GetKeyDown(KeyCode.F3) && waiting && SkillEnabled.enabledGetCash)
+                SkillActive.SkillActive.GetCashDealer();
         }
 
         private bool WaitTime()
@@ -173,7 +192,10 @@ namespace SkillTree
             {
                 skillPointValid = 1;
                 if (lastProcessedTier == 5)
+                {
                     skillPointValid = 2;
+                    specialSkillPointValid = 1;
+                }
             }
 
             lastProcessedTier = levelManager.Tier;
@@ -189,6 +211,7 @@ namespace SkillTree
                 int statsGained = 0;
                 int opsGained = 0;
                 int socialGained = 0;
+                int specialGained = 0;
 
                 for (int i = 0; i < skillPointValid; i++)
                 {
@@ -207,13 +230,16 @@ namespace SkillTree
                     }
                 }
 
+                for (int i = 0; i < specialSkillPointValid; i++)
+                    specialGained++;
+
                 if (skillTreeUI == null)
-                    skillTreeUI = new SkillTreeUI(skillData, skillConfig);
+                skillTreeUI = new SkillTreeUI(skillData, skillConfig);
 
                 if (skillTreeUI != null)
-                    skillTreeUI.AddPoints(statsGained, opsGained, socialGained);
+                    skillTreeUI.AddPoints(statsGained, opsGained, socialGained, specialGained);
 
-                MelonLogger.Msg($"[SkillTree] Processed: Rank {levelManager.Rank} Tier {levelManager.Tier}. Gains: Stats+{statsGained} Operations+{opsGained} Social+{socialGained}");
+                MelonLogger.Msg($"[SkillTree] Processed: Rank {levelManager.Rank} Tier {levelManager.Tier}. Gains: Stats+{statsGained} Operations+{opsGained} Social+{socialGained} Special+{specialGained}");
             }
         }
 
@@ -225,10 +251,11 @@ namespace SkillTree
             int currentRank = (int)levelManager.Rank;
             int currentTier = levelManager.Tier - 1;
 
-            int maxPointsPossible = (currentRank * 6) + currentTier;
-            //MelonLogger.Msg("maxPointsPossible " + maxPointsPossible);
-            int maxPointsJson = skillData.StatsPoints + skillData.OperationsPoints + skillData.SocialPoints + skillData.UsedSkillPoints;
-            //MelonLogger.Msg("maxPointsJson " + maxPointsJson);
+            int maxPointsPossible = (currentRank * 7) + currentTier;
+            MelonLogger.Msg("maxPointsPossible " + maxPointsPossible);
+            int maxPointsJson = skillData.StatsPoints + skillData.OperationsPoints + skillData.SocialPoints + skillData.SpecialPoints + skillData.UsedSkillPoints;
+            int maxSpecialPossible = currentRank;
+            MelonLogger.Msg("maxPointsJson " + maxPointsJson);
 
             if (maxPointsPossible != maxPointsJson)
             {
@@ -239,7 +266,8 @@ namespace SkillTree
                 skillData = SkillTreeSaveManager.LoadOrCreate();
                 skillConfig = SkillTreeSaveManager.LoadConfig();
                 skillTreeUI = new SkillTreeUI(skillData, skillConfig);
-                skillPointValid = maxPointsPossible;
+                skillPointValid = maxPointsPossible - currentRank;
+                specialSkillPointValid = currentRank;
             }
             SkillSystem.ApplyAll(skillData);
         }

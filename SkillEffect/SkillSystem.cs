@@ -2,15 +2,21 @@
 using MelonLoader;
 using ScheduleOne;
 using ScheduleOne.Economy;
+using ScheduleOne.Employees;
 using ScheduleOne.Growing;
 using ScheduleOne.ItemFramework;
+using ScheduleOne.Management;
 using ScheduleOne.PlayerScripts;
 using ScheduleOne.Property;
 using SkillTree.Json;
+using SkillTree.SkillPatchOperations;
 using SkillTree.SkillPatchSocial;
+using SkillTree.SkillPatchStats;
+using SkillTree.SkillSpecial.SkillEmployee;
 using System.Reflection;
 using UnityEngine;
 using static MelonLoader.MelonLogger;
+using static SkillTree.SkillActive.SkillActive;
 
 namespace SkillTree.SkillEffect
 {
@@ -22,6 +28,11 @@ namespace SkillTree.SkillEffect
         private static Business[] businessList;
         private static Dealer[] dealerList;
         private static Registry registry;
+
+        private static Packager[] packagerList;
+        private static Chemist[] chemistList;
+        private static Botanist[] botanistList;
+        private static Cleaner[] cleanerList;
 
         public static void ApplySkill(string skillId, SkillTreeData data)
         {
@@ -39,17 +50,17 @@ namespace SkillTree.SkillEffect
                 case "Stats":
                     { 
                         MelonLogger.Msg("Player Health Before: " + localPlayer.Health.CurrentHealth);
-                        SkillPatchStats.PlayerHealthConfig.MaxHealth = 100 + (data.Stats * 20f);
-                        localPlayer.Health.SetHealth(SkillPatchStats.PlayerHealthConfig.MaxHealth);
-                        localPlayer.Health.RecoverHealth(SkillPatchStats.PlayerHealthConfig.MaxHealth);
+                        PlayerHealthConfig.MaxHealth = 100 + (data.Stats * 20f);
+                        localPlayer.Health.SetHealth(PlayerHealthConfig.MaxHealth);
+                        localPlayer.Health.RecoverHealth(PlayerHealthConfig.MaxHealth);
                         MelonLogger.Msg("Player Health Now: " + localPlayer.Health.CurrentHealth);
                         break;
                     }
                 case "MoreMovespeed":
                     {
                         MelonLogger.Msg("MoveSpeed Before: " + playerMovement.MoveSpeedMultiplier);
-                        SkillPatchStats.PlayerMovespeed.MovespeedBase = 1f + (data.MoreMovespeed * 0.10f);
-                        playerMovement.MoveSpeedMultiplier = SkillPatchStats.PlayerMovespeed.MovespeedBase;
+                        PlayerMovespeed.MovespeedBase = 1f + (data.MoreMovespeed * 0.10f);
+                        playerMovement.MoveSpeedMultiplier = PlayerMovespeed.MovespeedBase;
                         MelonLogger.Msg("MoveSpeed Now: " + playerMovement.MoveSpeedMultiplier);
                         break;
                     }
@@ -84,90 +95,90 @@ namespace SkillTree.SkillEffect
                     }
                 case "MoreXP":
                     {
-                        SkillPatchStats.PlayerXPConfig.XpBase = 100f + (data.MoreXP * 5f);
-                        MelonLogger.Msg($"XP Base updated for: {SkillPatchStats.PlayerXPConfig.XpBase}%");
+                        PlayerXPConfig.XpBase = 100f + (data.MoreXP * 5f);
+                        MelonLogger.Msg($"XP Base updated for: {PlayerXPConfig.XpBase}%");
                         break;
                     }
                 case "MoreXP2":
                     {
-                        SkillPatchStats.PlayerXPConfig.XpBase = 100f + ((data.MoreXP + data.MoreXP2) * 5f);
-                        MelonLogger.Msg($"XP Base updated for: {SkillPatchStats.PlayerXPConfig.XpBase}%");
+                        PlayerXPConfig.XpBase = 100f + ((data.MoreXP + data.MoreXP2) * 5f);
+                        MelonLogger.Msg($"XP Base updated for: {PlayerXPConfig.XpBase}%");
                         break;
                     }
                 case "BetterDelivery":
                     {
-                        SkillPatchStats.BetterDelivery.Add = (data.BetterDelivery == 1);
+                        BetterDelivery.Add = (data.BetterDelivery == 1);
                         break;
                     }
                 case "AllowSleepAthEne":
                     {
-                        SkillPatchStats.AllowSleepAthEne.Add = (data.AllowSleepAthEne == 1);
+                        AllowSleepAthEne.Add = (data.AllowSleepAthEne == 1);
                         break;
                     }
                 case "AllowSeeCounteroffChance":
                     {
-                        SkillPatchStats.CounterofferHelper.Counteroffer = (data.AllowSeeCounteroffChance == 1);
+                        CounterofferHelper.Counteroffer = (data.AllowSeeCounteroffChance == 1);
                         break;
                     }
                 case "SkipSchedule":
                     {
-                        SkillPatchStats.SkipSchedule.Add = (data.SkipSchedule == 1);
+                        SkipSchedule.Add = (data.SkipSchedule == 1);
                         break;
                     }
                 case "MoreXPWhenEarnMoney":
-                        SkillPatchStats.PlayerXpMoney.XpMoney = (data.MoreXPWhenEarnMoney == 1);
+                        PlayerXpMoney.XpMoney = (data.MoreXPWhenEarnMoney == 1);
                         break;
 
                 // OPERATIONS
                 case "Operations":
-                    SkillPatchOperations.BetterGrowTent.Add = (data.Operations * 0.16f);
+                    BetterGrowTent.Add = (data.Operations * 0.16f);
                     break;
 
                 case "GrowthSpeed":
-                    SkillPatchOperations.GrowthSpeedUp.Add = (data.GrowthSpeed * 0.025f);
+                    GrowthSpeedUp.Add = (data.GrowthSpeed * 0.025f);
                     break;
 
                 case "GrowthSpeed2":
-                    SkillPatchOperations.GrowthSpeedUp.Add = ((data.GrowthSpeed + data.GrowthSpeed2) * 0.025f);
+                    GrowthSpeedUp.Add = ((data.GrowthSpeed + data.GrowthSpeed2) * 0.025f);
                     break;
 
                 case "MoreYield":
-                    SkillPatchOperations.YieldAdd.Add = (data.MoreYield);
+                    YieldAdd.Add = (data.MoreYield);
                     break;
 
                 case "MoreQuality":
-                    SkillPatchOperations.QualityUP.Add = (data.MoreQuality * 0.15f);
-                    SkillPatchOperations.QualityMushroomUP.Add = (data.MoreQuality == 2 ? 0.3f : 0f);
+                    QualityUP.Add = (data.MoreQuality * 0.15f);
+                    QualityMushroomUP.Add = (data.MoreQuality == 2 ? 0.3f : 0f);
                     break;
 
                 case "MoreQualityMethCoca":
-                    SkillPatchOperations.MethQualityAdd.Add = (data.MoreQualityMethCoca == 1);
+                    MethQualityAdd.Add = (data.MoreQualityMethCoca == 1);
                     break;
                 case "AbsorbentSoil":
-                    SkillPatchOperations.AbsorbentSoil.Add = (data.AbsorbentSoil == 1);
+                    AbsorbentSoil.Add = (data.AbsorbentSoil == 1);
                     break;
 
                 case "MoreMixAndDryingRackOutput":
-                    SkillPatchOperations.StackItem2xFix.Add = (data.MoreMixAndDryingRackOutput == 1);
-                    SkillPatchOperations.MixOutputAdd.Add = (data.MoreMixAndDryingRackOutput * 2) == 0 ? 1 : (data.MoreMixAndDryingRackOutput * 2);
+                    StackItem2xFix.Add = (data.MoreMixAndDryingRackOutput == 1);
+                    MixOutputAdd.Add = (data.MoreMixAndDryingRackOutput * 2) == 0 ? 1 : (data.MoreMixAndDryingRackOutput * 2);
                     break;
 
                 case "ChemistStationQuick":
-                    SkillPatchOperations.StationTimeLess.TimeAjust = (data.ChemistStationQuick * 1.5f) == 0? 1 : (data.ChemistStationQuick * 1.5f);
-                    SkillPatchOperations.MixOutputAdd.TimeAjust = (data.ChemistStationQuick * 2) == 0 ? 1 : (data.ChemistStationQuick * 2);
+                    StationTimeLess.TimeAjust = (data.ChemistStationQuick * 1.5f) == 0? 1 : (data.ChemistStationQuick * 1.5f);
+                    MixOutputAdd.TimeAjust = (data.ChemistStationQuick * 2) == 0 ? 1 : (data.ChemistStationQuick * 2);
                     break;
 
                 case "MoreCauldronOutput":
                     {
-                        int valueBase = SkillPatchOperations.CauldronOutputAdd.Add;
+                        int valueBase = CauldronOutputAdd.Add;
                         int bonus = Mathf.FloorToInt(valueBase * 1f * data.MoreCauldronOutput);
-                        SkillPatchOperations.CauldronOutputAdd.Add = valueBase + bonus;
+                        CauldronOutputAdd.Add = valueBase + bonus;
                     }
                     break;
 
                 // SOCIAL
                 case "Social":
-                    SkillPatchSocial.CustomerSample.AddSampleChance = (data.Social * 0.05f);
+                    CustomerSample.AddSampleChance = (data.Social * 0.05f);
                     break;
 
                 case "CityEvolving":
@@ -219,8 +230,8 @@ namespace SkillTree.SkillEffect
                     break;
                 case "MoreATMLimit":
                     {
-                        SkillPatchSocial.ATMConfig.MaxWeeklyLimit = 10000f + (data.MoreATMLimit * 2500);
-                        MelonLogger.Msg($"ATM Deposit Weekly Limit: ${SkillPatchSocial.ATMConfig.MaxWeeklyLimit}");
+                        ATMConfig.MaxWeeklyLimit = 10000f + (data.MoreATMLimit * 2000);
+                        MelonLogger.Msg($"ATM Deposit Weekly Limit: ${ATMConfig.MaxWeeklyLimit}");
                         break;
                     }
                 case "DealerCutLess":
@@ -249,14 +260,53 @@ namespace SkillTree.SkillEffect
                     }
                 case "DealerMoreCustomer":
                     {
-                        SkillPatchSocial.DealerUpCustomer.MaxCustomer = 8 + (data.DealerMoreCustomer * 2);
-                        MelonLogger.Msg($"Dealer MaxCustomer: {SkillPatchSocial.DealerUpCustomer.MaxCustomer}");
+                        DealerUpCustomer.MaxCustomer = 8 + (data.DealerMoreCustomer * 2);
+                        MelonLogger.Msg($"Dealer MaxCustomer: {DealerUpCustomer.MaxCustomer}");
                         break;
                     }
                 case "BetterSupplier":
                     {
-                        SkillPatchSocial.SupplierUp.SupplierInc = 1f + (1f * (data.BetterSupplier * 0.675f));
-                        SkillPatchSocial.SupplierUp.SupplierLimit = (int)(10 + (10 * (data.BetterSupplier * 0.5f)));
+                        SupplierUp.SupplierInc = 1f + (1f * (data.BetterSupplier * 0.675f));
+                        SupplierUp.SupplierLimit = (int)(10 + (10 * (data.BetterSupplier * 0.5f)));
+                        break;
+                    }
+
+                //SPECIAL
+                case "Special":
+                    {
+                        SkillEnabled.enabledTrash = (data.Special == 1);
+                        break;
+                    }
+                case "Heal":
+                    {
+                        SkillEnabled.enabledHeal = (data.Heal == 1);
+                        break;
+                    }
+                case "GetCashDealer":
+                    {
+                        SkillEnabled.enabledGetCash = (data.GetCashDealer == 1);
+                        break;
+                    }
+                case "BetterBotanists":
+                    {
+                        BetterBotanist.Add = (data.BetterBotanists == 1);
+                        break;
+                    }
+                case "Employees24h":
+                    {
+                        CanWork.Add = (data.Employees24h == 1);
+                        break;
+                    }
+                case "EmployeeMovespeed":
+                    {
+                        EmployeeMovespeed.Add = (data.EmployeeMovespeed == 1);
+                        ValidEmployees();
+                        break;
+                    }
+                case "EmployeeMaxStation":
+                    {
+                        EmployeeMoreStation.Add = (data.EmployeeMaxStation * 2);
+                        ValidEmployees();
                         break;
                     }
             }
@@ -275,6 +325,56 @@ namespace SkillTree.SkillEffect
             if (dealer.name.ToLower().Contains("carteldealer"))
                 return false;
             return true;
+        }
+
+        private static void ValidEmployees()
+        { 
+
+            if (!BetterBotanist.Add) return;
+
+            packagerList = UnityEngine.Object.FindObjectsOfType<Packager>();
+            chemistList = UnityEngine.Object.FindObjectsOfType<Chemist>();
+            botanistList = UnityEngine.Object.FindObjectsOfType<Botanist>();
+            cleanerList = UnityEngine.Object.FindObjectsOfType<Cleaner>();
+
+
+            if (EmployeeMoreStation.Add == 0) return;
+
+            foreach (Packager packager in packagerList)
+            {
+                if (EmployeeMovespeed.Add)
+                    packager.Movement.MovementSpeedScale = 0.33f;
+            }
+
+            foreach (Chemist chemist in chemistList)
+            {
+                if (EmployeeMovespeed.Add)
+                    chemist.Movement.MovementSpeedScale = 0.33f;
+
+                if (EmployeeMoreStation.Add > 0)
+                {
+                    var config = chemist.Configuration as ChemistConfiguration;
+                    config.Stations.MaxItems = 4 + EmployeeMoreStation.Add;
+                }
+            }
+
+            foreach (Botanist botanist in botanistList)
+            {
+                if (EmployeeMovespeed.Add)
+                    botanist.Movement.MovementSpeedScale = 0.33f;
+
+                if (EmployeeMoreStation.Add > 0)
+                {
+                    var config = botanist.Configuration as BotanistConfiguration;
+                    config.Assigns.MaxItems = 8 + (EmployeeMoreStation.Add);
+                }
+            }
+            foreach (Cleaner cleaner in cleanerList)
+            {
+                if (!EmployeeMovespeed.Add) continue;
+
+                cleaner.Movement.MovementSpeedScale = 0.33f;
+            }
         }
     }
 }

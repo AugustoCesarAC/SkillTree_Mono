@@ -89,6 +89,8 @@ namespace SkillTree.UI
             GUILayout.Label($"Operations: {editData.OperationsPoints}");
             GUILayout.Space(10);
             GUILayout.Label($"Social: {editData.SocialPoints}");
+            GUILayout.Space(10);
+            GUILayout.Label($"Special: {editData.SpecialPoints}");
 
             GUILayout.EndHorizontal();
 
@@ -157,6 +159,9 @@ namespace SkillTree.UI
 
             if (GUILayout.Button("Social"))
                 selectedCategory = SkillCategory.Social;
+
+            if (GUILayout.Button("Special"))
+                selectedCategory = SkillCategory.Special;
         }
 
         private void DrawCategoryHeader()
@@ -207,7 +212,7 @@ namespace SkillTree.UI
 
             GUILayout.Space(depth * 20);
 
-            GUILayout.Label($"{skill.Name} ({value}/{maxLevel})", GUILayout.Width(180));
+            GUILayout.Label($"{skill.Name} ({value}/{maxLevel})", GUILayout.Width(270));
 
             if (value < maxLevel)
             {
@@ -260,6 +265,8 @@ namespace SkillTree.UI
                     return editData.OperationsPoints;
                 case SkillCategory.Social:
                     return editData.SocialPoints;
+                case SkillCategory.Special:
+                    return editData.SpecialPoints;
                 default:
                     return 0;
             }
@@ -277,6 +284,9 @@ namespace SkillTree.UI
                     break;
                 case SkillCategory.Social:
                     editData.SocialPoints--;
+                    break;
+                case SkillCategory.Special:
+                    editData.SpecialPoints--;
                     break;
             }
 
@@ -499,15 +509,17 @@ namespace SkillTree.UI
             return tex;
         }
 
-        public void AddPoints(int stats, int ops, int social)
+        public void AddPoints(int stats, int ops, int social, int special)
         {
             this.editData.StatsPoints += stats;
             this.editData.OperationsPoints += ops;
             this.editData.SocialPoints += social;
+            this.editData.SpecialPoints += special;
 
             this.originalData.StatsPoints += stats;
             this.originalData.OperationsPoints += ops;
             this.originalData.SocialPoints += social;
+            this.originalData.SpecialPoints += special;
 
             SkillTreeSaveManager.Save(this.editData);
 

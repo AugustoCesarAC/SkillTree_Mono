@@ -11,6 +11,7 @@ namespace SkillTree.Json
         public int StatsPoints = 0;
         public int OperationsPoints = 0;
         public int SocialPoints = 0;
+        public int SpecialPoints = 0;
         public int UsedSkillPoints = 0;
 
         /* STATUS START HERE */
@@ -113,7 +114,7 @@ namespace SkillTree.Json
         public int CityEvolving = 0;
 
         // Social subs
-        [Skill("More ATM Limit", "Increase ATM Deposit Limit by +2500", SkillCategory.Social, "Social", 2)]
+        [Skill("More ATM Limit", "Increase ATM Deposit Limit by +2000", SkillCategory.Social, "Social", 2)]
         public int MoreATMLimit = 0;
 
         // MoreATMLimit subs
@@ -137,6 +138,38 @@ namespace SkillTree.Json
         public int DealerSpeedUp = 0;
 
         /* SOCIAL ENDS HERE */
+
+        /* SPECIAL STARTS HERE */
+
+        // Special 
+        [Skill("Gain Ability To Destroy The Trash (F1)", "Allow you to destroy trash", SkillCategory.Special, null, 1)]
+        public int Special = 0;
+
+        // Special Subs
+        [Skill("Gain Ability To Heal Yourself (F2)", "Allow you to heal you life", SkillCategory.Special, "Special", 1)]
+        public int Heal = 0;
+
+        // Special Subs
+        [Skill("Gain Ability To Get Dealers Cash (F3)", "Allow you to get dealers cash", SkillCategory.Special, "Special", 1)]
+        public int GetCashDealer = 0;
+
+        // Special Subs
+        [Skill("Better Botanists", "All action the botanists is 2 times faster", SkillCategory.Special, "Special", 1)]
+        public int BetterBotanists = 0;
+
+        // Special Subs
+        [Skill("Employees Work 24h", "Employees don't stop at 4 AM", SkillCategory.Special, "Special", 1)]
+        public int Employees24h = 0;
+
+        // BetterBotanists Subs
+        [Skill("Make Employees Move Faster", "Employees move 3 times faster", SkillCategory.Special, "BetterBotanists", 1)]
+        public int EmployeeMovespeed = 0;
+
+        // BetterBotanists Subs
+        [Skill("Increase +2 Employees Max Station (Botanist/Chemist)", "Increase +2 The Base MaxStation Allowance For Employees", SkillCategory.Special, "BetterBotanists", 2)]
+        public int EmployeeMaxStation = 0;
+
+        /* SPECIAL ENDS HERE */
 
     }
 }

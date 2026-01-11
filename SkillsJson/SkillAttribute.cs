@@ -8,7 +8,8 @@ namespace SkillTree.Json
     {
         Stats,
         Operations,
-        Social
+        Social,
+        Special
     }
 
     [AttributeUsage(AttributeTargets.Field)]

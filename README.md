@@ -4,6 +4,8 @@
 
 **Main and Mono Branch**
 
+**Now with Special Category**
+
 ## **Functions**
 
 To open the Skill Tree Window, just press **"C"**
@@ -13,13 +15,16 @@ When a player levels up (increases Tier or Rank), they earn Skill Points:
 * 1 Point for every Tier increase.
 * 2 Points for every Rank increase.
 
+* 1 Special Point for every Rank increase.
+
 *Example: If you are Tier V and advance to Tier I, you will receive 2 points.*
 
-Skill Points are divided into three categories: **Stats, Operations, and Social.**
+Skill Points are divided into four categories: **Stats, Operations, Social, Special.**
 
 * **Stats**: Modify the player's base attributes, such as Max Health, XP gain, and Movement Speed.
 * **Operations**: Relates to plant cultivation and Chemistry Stations.
 * **Social**: Affects NPC interactions and player status.
+* **Special**: These skills cover unique player abilities and employee automation
 
 ---
 
@@ -71,6 +76,20 @@ Skill Points are divided into three categories: **Stats, Operations, and Social.
         [*] [Dealer Speed Up]: Increase Movespeed (2x) (Parent: Dealer)
 
 ```
+
+### **Special Skills**
+
+```text
+[*] **Destroy Trash (F1)** | Gain ability to destroy trash. 
+[*] **Heal Yourself (F2)** | Gain ability to heal your life. 
+[*] **Get Dealers Cash (F3)** | Gain ability to get dealers cash.
+[*] **Employees Work 24h** | Employees don't stop at 4 AM.
+[*] **Better Botanists** | All botanist actions are 2x faster. 
+[*] ↳ *Move Speed* | Employees move 3x faster. 
+[*] ↳ *Max Station* | Increase +2 MaxStation for Botanists/Chemists. 
+
+```
+---
 
 ---
 

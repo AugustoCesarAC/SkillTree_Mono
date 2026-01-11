@@ -490,8 +490,11 @@
 
 	<ItemGroup>
 		<Compile Include="Core.cs" />
+		<Compile Include="SkillSpecial\SkillActive.cs" />
 		<Compile Include="SkillBasePatch.cs" />
 		<Compile Include="SkillEffect\SkillSystem.cs" />
+		<Compile Include="SkillSpecial\SkillEmployee\SkillPatchBotanist.cs" />
+		<Compile Include="SkillSpecial\SkillEmployee\SkillPatchEmployee.cs" />
 		<Compile Include="SkillPatchOperations\SkillPatchOperations.cs" />
 		<Compile Include="SkillPatchSocial\SkillPatchSocial.cs" />
 		<Compile Include="SkillPatchStats\SkillPatchStats.cs" />
